@@ -3,7 +3,7 @@ require('dotenv').config();
 const request=require('supertest')
 
 const app=require('../../app')
-const {mongooseConnect}=require('../../services/mongo')
+const {mongooseConnect,mongooseDisconnect}=require('../../services/mongo')
 const {getPlanetsData}=require('../../models/planets.model')
 
 describe('Launches API',()=>{
@@ -11,6 +11,10 @@ describe('Launches API',()=>{
         await mongooseConnect()
         await getPlanetsData()
     })
+
+    afterAll(async ()=>{
+        await mongooseDisconnect()
+    }
     
     describe("checks GET/planets ",()=>{
         test("response should be 200 ok",async ()=>{

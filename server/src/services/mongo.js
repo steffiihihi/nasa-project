@@ -14,6 +14,11 @@ async function mongooseConnect(){
     mongoose.connect(MONGO_URL)
 }
 
+async function mongooseDisconnect(){
+    mongoose.disconnect(MONGO_URL)
+}
+
 module.exports={
-    mongooseConnect
+    mongooseConnect,
+    mongooseDisconnect
 }
