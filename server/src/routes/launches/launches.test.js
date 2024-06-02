@@ -4,10 +4,12 @@ const request=require('supertest')
 
 const app=require('../../app')
 const {mongooseConnect}=require('../../services/mongo')
+const {getPlanetsData}=require('../../models/planets.model')
 
 describe('Launches API',()=>{
     beforeAll(async ()=>{
         await mongooseConnect()
+        await getPlanetsData()
     })
     
     describe("checks GET/planets ",()=>{
