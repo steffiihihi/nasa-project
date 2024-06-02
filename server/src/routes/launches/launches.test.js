@@ -14,7 +14,7 @@ describe('Launches API',()=>{
 
     afterAll(async ()=>{
         await mongooseDisconnect()
-    }
+    })
     
     describe("checks GET/planets ",()=>{
         test("response should be 200 ok",async ()=>{
