@@ -6,6 +6,7 @@ const planets=require('./planets.mongo')
 const DEFAULT_FLIGHT_NUMBER=100;
 
 async function populateLaunches(){
+    console.log("yahan aaya")
     const response=await axios.post('https://api.spacexdata.com/v4/launches/query',{
         query:{},
         options:{
@@ -28,9 +29,12 @@ async function populateLaunches(){
     })
 
     const launchDocs=response.data.docs
+    console.log("HEY")
     for(const launchDoc of launchDocs){
         const payloads=launchDoc['payloads']
+        console.log('Payloads:', payloads);
         const customers=payloads.flatMap((payload)=>{
+            console.log('Payload customers:', payload['customers']);
             return payload['customers']
         })
         const launch={
@@ -42,7 +46,7 @@ async function populateLaunches(){
             success: launchDoc['success'], 
             customers: customers
         }
-        console.log(launch.flightNumber+" "+launch.misson)
+        console.log(launch.flightNumber+" "+launch.mission)
 
         await saveLaunch(launch)
     }
